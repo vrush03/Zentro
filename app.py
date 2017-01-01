@@ -42,11 +42,33 @@ def getData():
 	curr = conn.cursor()
 	curr.execute("Select * from Order1")
 	data = curr.fetchall()
-	print data
+	#print data[0],data[1]
+	data_dict = []
+	for i in data:
+			#print i
+			data_dic = {
+			'Detail': i[0],
+			'MobileNo': i[1],
+			'PINCODE': i[2],
+			'Landmark': i[3],
+			'Society': i[4],
+			'Flat': i[5],
+			'Place' : i[6],
+			'FirstName' : i[7],
+			'LastName' : i[8],
+			'Useremail' : i[9],
+			}
+			data_dict.append(data_dic)
+			#print i
+			#print data_dic
+	
+	#print data_dict
+	finData = data_dict
 	conn.commit()
 	curr.close()
 	conn.close()
-	return render_template('index.html')
+	return render_template('admin.html',loopdata = finData)
+
 
 if __name__ == "__main__":
     app.debug = True
