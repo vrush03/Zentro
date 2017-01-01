@@ -36,6 +36,18 @@ def main():
 	#print firstname
 	return render_template('index.html')
 
+@app.route("/database", methods=['GET', 'POST'])
+def getData():
+	conn = mysql.connect()
+	curr = conn.cursor()
+	curr.execute("Select * from Order1")
+	data = curr.fetchall()
+	print data
+	conn.commit()
+	curr.close()
+	conn.close()
+	return render_template('index.html')
+
 if __name__ == "__main__":
     app.debug = True
     #print "Hello"
